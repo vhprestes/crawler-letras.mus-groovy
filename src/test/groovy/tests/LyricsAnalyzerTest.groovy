@@ -59,7 +59,15 @@ class LyricsAnalyzerTest extends Specification {
 
         expect:
         lyricsAnalyzer.findFourWordSentences(text.toLowerCase().trim()) == ["te pego na escola", "e encho sua bola", "com todo meu amor", "te levo pra festa", "te faço um filho", "te dou outra vida"]
+    }
 
+    def "Find special characteres words"() {
+        given:
+        String text = "Não posso negar que tem sido difícil lidar com o fim do nosso relacionamento. Os carinhos deram lugar a solidão, e a saudade faz embaçar a vista"
+        def lyricsAnalyzer = new LyricsAnalyzer()
+
+        expect:
+        lyricsAnalyzer.findSpecialCharactersWords(text.toLowerCase().trim()) == ["não", "solidão", "embaçar"]
     }
 
 }
