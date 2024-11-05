@@ -70,4 +70,41 @@ class LyricsAnalyzerTest extends Specification {
         lyricsAnalyzer.findSpecialCharactersWords(text.toLowerCase().trim()) == ["não", "solidão", "embaçar"]
     }
 
+    def "Find repeated phrases"() {
+        given:
+
+        String text = "Tive pensando em me mudar\n" +
+                "Sem te deixar pra trás, yeah\n" +
+                "Resolvi pensar em nós, yeah\n" +
+                "Vou te levar daqui\n" +
+                "Vou te levar, yeah\n" +
+                "Te levar daqui, yeah\n" +
+                "Vou te levar, yeah\n" +
+                "Te levar daqui\n" +
+                "Aquele tempo ficou pra trás\n" +
+                "Eu nunca fui feliz ali\n" +
+                "Resolvi pensar em nós, yeah\n" +
+                "Vou te levar daqui\n" +
+                "Vou te levar, yeah\n" +
+                "Te levar daqui\n" +
+                "Vou te levar, yeah\n" +
+                "Te levar daqui\n" +
+                "Mantenho a história de luz de glória\n" +
+                "Mas só deixa eu te contar o que eu passei por lá\n" +
+                "Mas eu ainda fico impressionado com as coisas da cidade\n" +
+                "Aqueles mano se foram chegaram antes se foram\n" +
+                "Pra onde foram ninguém sabe ninguém faz\n" +
+                "Anos e anos da correria faz leva e traz\n" +
+                "Anos e anos da correria faz leva e traz, yeah"
+
+
+        def lyricsAnalyzer = new LyricsAnalyzer()
+
+        expect:
+        lyricsAnalyzer.findRepeatedPhrases(text.toLowerCase().trim()) == ["resolvi pensar em nós": 2, "vou te levar daqui": 2, "vou te levar": 4, "te levar daqui": 4, "anos e anos da correria faz leva e traz": 2]
+    }
+
+
+
+
 }
