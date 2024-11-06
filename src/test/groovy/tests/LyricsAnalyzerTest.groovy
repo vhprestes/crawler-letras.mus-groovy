@@ -105,6 +105,11 @@ class LyricsAnalyzerTest extends Specification {
     }
 
 
+    def "test method to remove plural"() {
+        given:
+        String text = ""
+    }
+
 
 
 }
