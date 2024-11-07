@@ -29,12 +29,19 @@ class LyricsAnalyzer {
     }
 
     def findWordsWithHiatos(String text) {
-        def hiatoPattern = /\b\w*(a[áãeêí]|e[íé]|i[ía]|o[ía]|u[íu])\w*\b/
-        return text.findAll(hiatoPattern)
+        def hiatoPattern = /\b\w*(a[áãeêí]|e[íé]|i[ía]|o[ía]|u[aíu])\w*\b/
+        def res = text.findAll(hiatoPattern)
+        for (word in res) {
+            if (word.contains("qu")) {
+                res.remove(word)
+            }
+
+        }
+        return res
     }
 
     def findFourWordSentences(String text) {
-        def sentences = text.split(/[.,!?\r\n]/).collect { it.trim() }
+        def sentences = text.split(/[.,!?A-Z\r\n]/).collect { it.trim() }
         return sentences.findAll { it.split(/\s+/).size() == 4 }
     }
 
