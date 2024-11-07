@@ -43,7 +43,7 @@ class LyricsAnalyzer {
 
     }
 
-    def findProparoxytonas(List<String> lyrics) {
+    def findProparoxitonas(List<String> lyrics) {
         String proparoxytonasPattern = /\b\w*[áéíóúâêîôûãõàèìòùäëïöü][bcdfghjklmnpqrstvwxyz]*[aeiou][bcdfghjklmnpqrstvwxyz]*[aeiou][bcdfghjklmnpqrstvwxyz]*\b/
         return lyrics.collect {
             it.findAll(proparoxytonasPattern).findAll { word ->
@@ -55,7 +55,7 @@ class LyricsAnalyzer {
 
     def removePluralWords(List<String> lyrics) {
         String pluralPattern = /\b\w+(?:es|s)\b/
-        def res = lyrics.collect { it.replaceAll(pluralPattern, "").replaceAll(/\s+/, " ").trim() }.flatten()
+        List res = lyrics.collect { it.replaceAll(pluralPattern, "").replaceAll(/\s+/, " ").trim() }.flatten()
         res.removeIf { it.length() == 0 }
         return res
     }

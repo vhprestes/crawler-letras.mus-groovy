@@ -3,8 +3,6 @@ package tests
 import org.acczg.utils.LyricsAnalyzer
 import spock.lang.Specification
 
-import java.lang.reflect.Array
-
 class LyricsAnalyzerTest extends Specification {
 
     def "test main"() {
@@ -45,7 +43,7 @@ class LyricsAnalyzerTest extends Specification {
         def lyricsAnalyzer = new LyricsAnalyzer()
 
         expect:
-        lyricsAnalyzer.findProparoxytonas(text) == ['bálsamo', 'íntimo']
+        lyricsAnalyzer.findProparoxitonas(text) == ['bálsamo', 'íntimo']
     }
 
     def "Find four words sentences"() {

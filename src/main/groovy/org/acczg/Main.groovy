@@ -12,7 +12,7 @@ static void main(String[] args) {
     println "Ditongos: " + lyricsAnalyzer.findWordsWithDitongos(lyrics)
     println "Tritongos: " + lyricsAnalyzer.findWordsWithTritongos(lyrics)
     println "Hiatos: " + lyricsAnalyzer.findWordsWithHiatos(lyrics)
-    println "Proparoxytonas: " + lyricsAnalyzer.findProparoxytonas(lyrics)
+    println "Proparoxytonas: " + lyricsAnalyzer.findProparoxitonas(lyrics)
     println "Sentences with four words: " + lyricsAnalyzer.findFourWordSentences(lyrics)
 
     println lyrics
