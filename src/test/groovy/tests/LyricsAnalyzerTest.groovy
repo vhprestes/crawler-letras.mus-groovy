@@ -2,7 +2,7 @@ package tests
 
 import org.acczg.factory.AnalysisMethod
 import org.acczg.factory.LyricFilterFactory
-import org.acczg.utils.LyricsAnalyzer
+
 import spock.lang.Specification
 
 class LyricsAnalyzerTest extends Specification {
