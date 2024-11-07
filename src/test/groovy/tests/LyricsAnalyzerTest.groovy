@@ -116,7 +116,12 @@ class LyricsAnalyzerTest extends Specification {
 
     def "test method to remove plural"() {
         given:
-        String text = ""
+        List text = ["eu tento esquecer", "os tempos que passamos", "os planos que fizemos", "esses sentimentos", "casa", "casas", "seres"]
+        LyricsAnalyzer lyricsAnalyzer = new LyricsAnalyzer()
+
+        expect:
+        lyricsAnalyzer.removePluralWords(text) == ["eu tento esquecer", "que", "que", "casa"]
+
     }
 
 
