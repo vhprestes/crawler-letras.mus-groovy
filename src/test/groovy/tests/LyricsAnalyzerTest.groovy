@@ -34,7 +34,7 @@ class LyricsAnalyzerTest extends Specification {
         def lyricsAnalyzer = new LyricsAnalyzer()
 
         expect:
-        lyricsAnalyzer.findWordsWithHiatos(text) == ["ideia", "ideia", "ideia", "terminou"]
+        lyricsAnalyzer.findWordsWithHiatos(text) == ["ideia", "ideia", "ideia"]
     }
 
     def "Find proparoxítonas"() {
