@@ -55,6 +55,8 @@ class LyricsAnalyzer {
 
     def removePluralWords(List<String> lyrics) {
         String pluralPattern = /\b\w+(?:es|s)\b/
-        return lyrics.collect { it.replaceAll(pluralPattern, "").replaceAll(/\s+/, " ").trim() }
+        def res = lyrics.collect { it.replaceAll(pluralPattern, "").replaceAll(/\s+/, " ").trim() }.flatten()
+        res.removeIf { it.length() == 0 }
+        return res
     }
 }
