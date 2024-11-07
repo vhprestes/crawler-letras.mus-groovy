@@ -8,8 +8,6 @@ static void main(String[] args) {
     def crawler = new Crawler()
     def lyrics = crawler.getLyrics()
 
-
-
     LyricsAnalyzer lyricsAnalyzer = new LyricsAnalyzer()
     println "Ditongos: " + lyricsAnalyzer.findWordsWithDitongos(lyrics)
     println "Tritongos: " + lyricsAnalyzer.findWordsWithTritongos(lyrics)

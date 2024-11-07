@@ -11,7 +11,9 @@ class Crawler {
 
     def getLyrics() {
         Document doc = Jsoup.connect(url).get()
-        def lyrics = doc.select(".lyric-original").text()
-        return lyrics
+        def paragraphs = doc.select(".lyric-original p").collect { element ->
+            element.html().split("<br>").collect { it.trim() }
+        }.flatten()
+        return paragraphs
     }
 }
