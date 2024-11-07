@@ -1,63 +1,60 @@
 package org.acczg.utils
 
 class LyricsAnalyzer {
-//    LyricsAnalyzer(String text) {
-//      this.lirycs = text
-//   }
 
-    def findSpecialCharactersWords(String text) {
-        def pattern = /\b\w*[çãõ]\w*\b/
-        return text.findAll(pattern)
-    }
-
-    def findRepeatedPhrases(String text) {
-        def sentences = text.split(/[.,!?\r\n]/).collect { it.trim() }
-        sentences.removeIf { it.length() < 5 }
-        def frequency = sentences.countBy { it }
-        return frequency.findAll { it.value > 1 }
-    }
-
-
-    static def findWordsWithDitongos(String text) {
-        def ditongoPattern = /\b\w*(ai|au|ei|eu|iu|oi|ou|ui|ão|õe|ãe|ãi)\w*\b/
-        return text.findAll(ditongoPattern)
-    }
-
-    def findWordsWithTritongos(String text) {
-        def tritongoPattern = /\b\w*(uai|uei|uou|ieis|ueu)\w*\b/
-        return text.findAll(tritongoPattern)
-    }
-
-    def findWordsWithHiatos(String text) {
-        def hiatoPattern = /\b\w*(a[áãeêí]|e[íé]|i[ía]|o[ía]|u[aíu])\w*\b/
-        def res = text.findAll(hiatoPattern)
-        for (word in res) {
-            if (word.contains("qu")) {
-                res.remove(word)
-            }
-
-        }
+    def findSpecialCharactersWords(List<String> lyrics) {
+        String pattern = /\b\w*[çãõ]\w*\b/
+        def res = lyrics.collect { it.findAll(pattern).collect {it.toLowerCase()} }.flatten()
         return res
     }
 
-    def findFourWordSentences(String text) {
-        def sentences = text.split(/[.,!?A-Z\r\n]/).collect { it.trim() }
-        return sentences.findAll { it.split(/\s+/).size() == 4 }
+    def findRepeatedPhrases(List<String> lyrics) {
+        lyrics.removeIf { it.length() < 5 }
+        Map<String, Integer> frequency = lyrics.countBy { it.toLowerCase() }
+        return frequency.findAll { it.value > 1 }
     }
 
+    static def findWordsWithDitongos(List<String> lyrics) {
+        String ditongoPattern = /\b\w*(ai|au|ei|eu|iu|oi|ou|ui|ão|õe|ãe|ãi)\w*\b/
+        return lyrics.collect { it.findAll(ditongoPattern) }.flatten()
+    }
 
-    def findProparoxytonas(String text) {
-        def proparoxytonasPattern = /\b\w*[áéíóúâêîôûãõàèìòùäëïöü][bcdfghjklmnpqrstvwxyz]*[aeiou][bcdfghjklmnpqrstvwxyz]*[aeiou][bcdfghjklmnpqrstvwxyz]*\b/
-        return text.findAll(proparoxytonasPattern).findAll { word ->
-            def syllables = word.split(/(?<=[aeiouáéíóúâêîôûãõàèìòùäëïöü])/)
-            return syllables.size() > 2 && syllables[-3] ==~ /.*[áéíóúâêîôûãõàèìòùäëïöü].*/
+    def findWordsWithTritongos(List<String> lyrics) {
+        String tritongoPattern = /\b\w*(uai|uei|uou|ieis|ueu)\w*\b/
+        return lyrics.collect { it.findAll(tritongoPattern) }.flatten()
+    }
+
+    def findWordsWithHiatos(List<String> lyrics) {
+        String hiatoPattern = /\b\w*(a[áãeêí]|e[íé]|i[ía]|o[ía]|u[aíu])\w*\b/
+        List<String> res = lyrics.collect { it.findAll(hiatoPattern) }.flatten()
+        res.removeIf { it.contains("qu") }
+        return res
+    }
+
+    def findFourWordSentences(List<String> lyrics) {
+        def res = []
+        for (String sentence : lyrics) {
+            if (sentence.split(/\s+/).size() >= 4) {
+                sentence.trim().toLowerCase()
+                res.add(sentence)
+            }
         }
+        return res
+
     }
 
-
-    def removePluralWords(String text) {
-        def pluralPattern = /\b\w+(?:es|s)\b/
-        return text.replaceAll(pluralPattern, "").replaceAll(/\s+/, " ").trim()
+    def findProparoxytonas(List<String> lyrics) {
+        String proparoxytonasPattern = /\b\w*[áéíóúâêîôûãõàèìòùäëïöü][bcdfghjklmnpqrstvwxyz]*[aeiou][bcdfghjklmnpqrstvwxyz]*[aeiou][bcdfghjklmnpqrstvwxyz]*\b/
+        return lyrics.collect {
+            it.findAll(proparoxytonasPattern).findAll { word ->
+                String[] syllables = word.split(/(?<=[aeiouáéíóúâêîôûãõàèìòùäëïöü])/)
+                syllables.size() > 2 && syllables[-3] ==~ /.*[áéíóúâêîôûãõàèìòùäëïöü].*/
+            }
+        }.flatten()
     }
 
+    def removePluralWords(List<String> lyrics) {
+        String pluralPattern = /\b\w+(?:es|s)\b/
+        return lyrics.collect { it.replaceAll(pluralPattern, "").replaceAll(/\s+/, " ").trim() }
+    }
 }
