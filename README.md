@@ -4,7 +4,12 @@
 Projeto de crawler para coletar letras de músicas do site letras.mus.br
 
 ## O projeto
-O projeto será feito inicialmente para extrair a música "Construção" de Chico Buarque. Após isso, será feito um crawler para extrair qualquer música do site.
+O projeto será feito inicialmente para extrair a música "Construção" de Chico Buarque.
+
+## Melhorias futuras
+- [ ] Extrair qualquer música de qualquer artista
+- [ ] Um menu aonde possa navegar por cada música
+- [ ] Salvar as letras para evitar a necessidade de fazer a requisição novamente
 
 ## Tecnologias
 - Groovy
@@ -12,7 +17,6 @@ O projeto será feito inicialmente para extrair a música "Construção" de Chic
 - Spock
 - Gradle
 - IntelliJ IDEA
-- HTTPbuilder
 
 ## Execução
 **TODO**
